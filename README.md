@@ -1,0 +1,3 @@
+# Estrutura de dados 1 - C
+
+Estudo de estrutura de dados 1, filas, pilhas e listas...
