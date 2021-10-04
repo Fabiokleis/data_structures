@@ -1,4 +1,5 @@
 #include "fila.h"
+#include <stdlib.h>
 
 Fila* create_queue(int tam) {
     Fila *f = (Fila *)malloc(sizeof(Fila));
@@ -31,8 +32,19 @@ int dequeue(Fila* f) {
     return elemento;
 }
 
+void drawQueue(Fila* f) {
+    srand(time(NULL));
+    int r = rand() % 10 + 1;
+
+    for (int i = 0; i < r; i++) {
+        enqueue(f, dequeue(f));
+    }
+    showQueue(f);
+}
+
 void showQueue(Fila* f) {
-    for (int i = f->ini; i != f->fim; i++) {
+    int i;
+    for (i = f->ini; i != f->fim; (i = (i + 1) % f->tam)) {
         printf("%d ", f->vetor[i]);
     }
     printf("\n");
