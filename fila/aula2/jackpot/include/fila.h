@@ -17,4 +17,4 @@ void desaloc(Fila *f);
 bool full(Fila *f);
 bool empty(Fila *f);
 void showQueue(Fila *f);
-void drawQueue(Fila *f);
+void drawQueue(Fila *f, int s);

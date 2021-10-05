@@ -32,14 +32,11 @@ int dequeue(Fila* f) {
     return elemento;
 }
 
-void drawQueue(Fila* f) {
-    srand(time(NULL));
-    int r = rand() % 10 + 1;
-
+void drawQueue(Fila* f, int r) {
+    
     for (int i = 0; i < r; i++) {
         enqueue(f, dequeue(f));
     }
-    showQueue(f);
 }
 
 void showQueue(Fila* f) {

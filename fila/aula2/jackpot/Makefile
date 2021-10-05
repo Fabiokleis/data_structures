@@ -12,4 +12,5 @@ clean:
 	rm -f ./build/main
 
 run:
-	./build/main 
+	chmod +x init.sh
+	./init.sh
