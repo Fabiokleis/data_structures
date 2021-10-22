@@ -17,7 +17,7 @@ void push_cards(Stack* cards) {
 }
 
 void show_cards(Stack* cards) {
-    int j, top;
+    int j;
 
     for (j = cards->top-1; j >= 0; j--) {
         printf("|%d", cards->vector[j]);
