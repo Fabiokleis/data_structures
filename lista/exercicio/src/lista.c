@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <limits.h>
 #include <stdlib.h>
 #include <stddef.h>
 #include "lista.h"
@@ -54,16 +55,12 @@ void imprimir_lista(Lista *lista) {
     for (v = lista; v != NULL; v = v->next) {
         printf("%d ", v->info);
     }
-    printf("\n");
 }
 
 void imprimir_lista_rec(Lista *lista) {
     if (lista != NULL) {
         printf("%d ", lista->info);
         imprimir_lista_rec(lista->next);
-
-    } else {
-        printf("\n");
     }
 }
 
@@ -92,7 +89,7 @@ int conta_nos_rec (Lista* lista) {
     int c = 0;
     if (lista != NULL) {
         // passa para o proximo nó
-        c += conta_nos_rec(lista->next);
+        c = conta_nos_rec(lista->next);
         // retorna, mas antes incrementa
         return ++c;
  
@@ -125,8 +122,11 @@ int procura_rec (Lista* lista, int elem) {
 
     if (lista != NULL) {
         if (lista->info != elem) {
-            // passa pro proximo nó
-            c += procura_rec(lista->next, elem);    
+            // passa por todos os nodes
+            // depois de passar, vem retornando
+            // cada um até achar o elemento
+            c = procura_rec(lista->next, elem);
+
             // retorna, mas antes incrementa
             return ++c;
         } else {
@@ -141,27 +141,108 @@ int procura_rec (Lista* lista, int elem) {
 }
 
 int lista_max_itr (Lista* lista) {
-   /*TERMINAR*/
+    Lista* aux;
+    int u = INT_MIN; // /usr/include/limits.h
+
+    while(lista != NULL) {
+        if (lista->info > u) {
+            u = lista->info;
+        }
+        aux = lista->next;
+        lista = aux;
+    }
+    
+    // caso lista vazia, ja retorna INT_MIN
+    return u;
 }
 
 /*Você pode usar outras funções aqui se achar necessário!*/
 int lista_max_rec (Lista* lista) {
-   /*TERMINAR*/
+
+    int u = INT_MIN; // /usr/include/limits.h
+    if (lista != NULL) {
+        /* passa todos os lista->info, 
+        então vai retornando cada lista->info para u,
+        então comparamos com 1 elemento de atraso u
+        em relacao ao próprio lista->info só que de 
+        trás para frente.
+        */
+        u = lista_max_rec(lista->next);
+        if (u > lista->info) {
+            return u;
+        } else {
+            return lista->info;
+        }
+    }
+
+    return u;
 }
 
 int lista_soma_itr (Lista* lista) {
-   /*TERMINAR*/
+    Lista* aux;
+    int s = 0;
+
+    while(lista != NULL) {
+        s += lista->info;
+        aux = lista->next;
+        lista = aux;
+    }
+
+    return s;
 }
 
 int lista_soma_rec (Lista* lista) {
-   /*TERMINAR*/
+   int s = 0;
+
+    if (lista != NULL) {
+        // passa todos os elementos
+        // então volta retornando na ordem reversa
+        // e S vai somando com cada valor lista->info
+        s = lista_soma_rec(lista->next);
+        return s += lista->info;
+    }
+
+    return s;
 }
 
-/*Você pode usar outras funções aqui se achar necessário!*/
+// provavelmente existe uma maneira melhor, mas é isso
 void imprimir_invertida_itr (Lista* lista) {
-   /*TERMINAR*/
+    Lista *next = NULL;
+    Lista *prev = NULL;
+    // inverte a lista
+    while (lista != NULL) {
+        /*
+        passa o proximo nó para um aux,
+        o proximo nó se torna o anterior (primeiro NULL),
+        passa o anterior no lugar da lista atual,
+        a lista atual se torna o próximo nó
+        */
+
+        next = lista->next;
+        lista->next = prev;
+        prev = lista;
+        lista = next;
+    }
+    lista = prev;
+    imprimir_lista(lista); // imprime o reverso
+
+    // passa de volta a lista na ordem normal
+    // visto que ja passei ela no reverso 
+    // basta fazer novamente
+    next = NULL;
+    prev = NULL;
+    while (lista != NULL) {
+        next = lista->next;
+        lista->next = prev;
+        prev = lista;
+        lista = next;
+    }
 }
 
 void imprimir_invertida_rec (Lista* lista) {
-   /*TERMINAR*/
+    if (lista != NULL) {
+        // passa todos os nós e vem `retornando` imprimindo
+        imprimir_invertida_rec(lista->next);
+        printf("%d ", lista->info);
+    }
 }

@@ -24,10 +24,11 @@ int main(int argc, char* argv[]) {
    printf("Posição de %d na lista (itr): %d\n", 7, procura_itr(lista, 7));
    printf("Posição de %d na lista (rec): %d\n", 7, procura_rec(lista, 7));
 
-   /* 
+    
    printf("Maior elemento na lista (itr): %d\n", lista_max_itr(lista));
    printf("Maior elemento na lista (rec): %d\n", lista_max_rec(lista));
-   
+
+
    printf("Soma total dos elementos na lista (itr): %d\n", lista_soma_itr(lista));
    printf("Soma total dos elementos na lista (rec): %d\n", lista_soma_rec(lista));
 
@@ -37,7 +38,9 @@ int main(int argc, char* argv[]) {
 
    printf("Lista invertida (rec): ");
    imprimir_invertida_rec (lista);
-   */
+
+   printf("\n");
+   imprimir_lista(lista);
    printf("\n");
 
 
