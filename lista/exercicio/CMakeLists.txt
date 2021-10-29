@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.21)
 
-project(game)
+project(list)
 
 file(GLOB SOURCE src/main.c src/*.c)
 
