@@ -37,4 +37,3 @@ Point getFront (Deck *q);
 
 /*Retorna sem remover o item na cauda da lista.*/
 Point getRear (Deck *q);                                  
-
