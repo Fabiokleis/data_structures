@@ -3,15 +3,50 @@
 #include <time.h>
 
 void BubbleSort (int *vetor, int tamanho) {
-    /*TERMINAR!*/
+    int i, j, t;
+
+    for (i = 1; i < tamanho; i++) {
+        for (j = 0; j < tamanho-i; j++) {
+            if (vetor[j] > vetor[j + 1]) {
+                t = vetor[j];
+                vetor[j] = vetor[j + 1];
+                vetor[j + 1] = t;
+            }
+        }
+    }
 }
  
 void SelectionSort (int *vetor, int tamanho) {
-    /*TERMINAR!*/
+    int i, j, lt, t;
+
+    for (i = 0; i < tamanho; i++) {
+        t = i;
+        for (j = i+1; j < tamanho; j++) {
+            if (vetor[j] < vetor[t]) {
+                t = j;
+            }
+        }
+
+        lt = vetor[i];
+        vetor[i] = vetor[t];
+        vetor[t] = lt;
+    }
 }
 
 void InsertionSort (int *vetor, int tamanho) {
-    /*TERMINAR!*/
+    int i, j, k, t;
+
+    for (i = 1; i < tamanho; i++) {
+        k = vetor[i]; // chave
+        for (j = i; j > 0 && (vetor[j] < k); j--) {
+            if (k < vetor[j]) {
+                vetor[j] = vetor[j - 1];
+            }
+        }
+
+        vetor[j] = k;
+    }
+
 }
 
 void Imprimir (int *A, int tamanho) {
@@ -64,7 +99,7 @@ int main () {
   if (!Verifica_Ordenacao(v1, tamanho)) {
      printf("Erro: a ordenação do BubbleSort não está correta!\n");
   }
-
+  
   start = clock();
   Imprimir(v2, tamanho);
   SelectionSort (v2, tamanho);
@@ -75,7 +110,7 @@ int main () {
   if (!Verifica_Ordenacao(v2, tamanho)) {
      printf("Erro: a ordenação do SelectionSort não está correta!\n");
   }
-
+  
   start = clock();
   Imprimir(v3, tamanho);
   InsertionSort (v3, tamanho);
@@ -86,7 +121,7 @@ int main () {
   if (!Verifica_Ordenacao(v3, tamanho)) {
      printf("Erro: a ordenação do InsertionSort não está correta!\n");
   }
- 
+  
   free (v1);
   free (v2);
   free (v3);
