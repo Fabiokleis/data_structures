@@ -34,19 +34,16 @@ void SelectionSort (int *vetor, int tamanho) {
 }
 
 void InsertionSort (int *vetor, int tamanho) {
-    int i, j, k, t;
+    int i, j, k;
 
     for (i = 1; i < tamanho; i++) {
-        k = vetor[i]; // chave
-        for (j = i; j > 0 && (vetor[j] < k); j--) {
-            if (k < vetor[j]) {
-                vetor[j] = vetor[j - 1];
-            }
+        k = vetor[i];
+        for (j = i-1; (j >= 0) && (vetor[j] > k); j--) {
+            vetor[j + 1] = vetor[j]; // abre espaço
         }
-
-        vetor[j] = k;
+        // quando for achado o lugar, ele estará uma posição atrás
+        vetor[j + 1] = k;
     }
-
 }
 
 void Imprimir (int *A, int tamanho) {
