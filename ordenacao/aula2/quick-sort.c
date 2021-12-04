@@ -21,9 +21,37 @@ void Imprimir (int *vetor, int tamanho) {
   printf ("\n");
 }
 
-void QuickSort (int *vetor, int esq, int dir) {
-  /*TERMINAR!*/
+int Particione(int *vetor, int e, int d) {
+    int t;
+    int p = vetor[d]; // p é o pivô
+    int i = e - 1;
+    int j;
+
+    for (j = e; j <= (d - 1); j++) {
+        if (vetor[j] <= p) {
+            i = i + 1;
+            t = vetor[i];
+            vetor[i] = vetor[j];
+            vetor[j] = t;
+        }
+    }
+
+    t = vetor[i + 1];
+    vetor[i + 1] = vetor[d];
+    vetor[d] = t;
+
+    return i + 1;
 }
+
+void QuickSort (int *vetor, int esq, int dir) {
+    int p;
+    if(esq < dir) {
+        p = Particione(vetor, esq, dir);
+        QuickSort(vetor, esq, p - 1);
+        QuickSort(vetor, p + 1, dir);
+    }
+}
+
 
 /*Função principal.*/
 int main (int argc, char *argv[]) {
