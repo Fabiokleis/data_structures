@@ -21,6 +21,7 @@ void Imprimir (int *vetor, int tamanho) {
   printf ("\n");
 }
 
+
 int Particione(int *vetor, int e, int d) {
     int t;
     int p = vetor[d]; // p é o pivô
@@ -43,10 +44,20 @@ int Particione(int *vetor, int e, int d) {
     return i + 1;
 }
 
+int Particione_Aleatorio(int A[], int l, int r) {
+    int t;
+    int pp = l + rand() % (r-l);
+    t = A[r];
+    A[r] = A[pp];
+    A[pp] = t;
+
+    return Particione(A, l, r);
+}
+
 void QuickSort (int *vetor, int esq, int dir) {
     int p;
     if(esq < dir) {
-        p = Particione(vetor, esq, dir);
+        p = Particione_Aleatorio(vetor, esq, dir);
         QuickSort(vetor, esq, p - 1);
         QuickSort(vetor, p + 1, dir);
     }
@@ -59,21 +70,23 @@ int main (int argc, char *argv[]) {
    double elapsed_time;
    srand(time(NULL));
    int i;
-   int tamanho = 10;
+   int tamanho = 1000000;
    int *vetor = (int *)malloc(tamanho * sizeof(int));
-   for (i = 0; i < tamanho; i++) {
-      vetor[i] = rand() % (tamanho+1);
+   for (i = tamanho; i > 0; i--) {
+      //vetor[i] = rand() % (tamanho+1);
+      vetor[i] = i;
    }
-   Imprimir (vetor, tamanho);
+   //Imprimir (vetor, tamanho);
    start = clock();
    QuickSort (vetor, 0, tamanho-1);
    end = clock();
    elapsed_time = (end - start)/(double)CLOCKS_PER_SEC;
    printf("Tempo de execução (Quick-Sort): %.2f\n", elapsed_time);
+
    if (!Verifica_Ordenacao(vetor, tamanho)) {
       printf("Erro: a ordenação não está correta!\n");
    }
-   Imprimir (vetor, tamanho);
+   //Imprimir (vetor, tamanho);
    free (vetor);
    return 0;
 }

@@ -9,9 +9,7 @@ void Imprimir (int *vetor, int tamanho) {
   } 
   printf ("\n");
 }
-
 int QuickFind (int *vetor, int esq, int dir, int k) {
-  /*TERMINAR!*/
 }
 
 /*Função principal.*/
