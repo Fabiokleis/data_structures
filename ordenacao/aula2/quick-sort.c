@@ -46,7 +46,7 @@ int Particione(int *vetor, int e, int d) {
 
 int Particione_Aleatorio(int A[], int l, int r) {
     int t;
-    int pp = l + rand() % (r-l);
+    int pp = l + rand() % (r - l + 1);
     t = A[r];
     A[r] = A[pp];
     A[pp] = t;
